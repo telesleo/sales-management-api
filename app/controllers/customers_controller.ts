@@ -4,6 +4,14 @@ import Customer from '../models/customer.js'
 
 export default class CustomersController {
   /**
+   * Display a list of customers
+   */
+  async index({}: HttpContext) {
+    const customers = await Customer.all()
+    return customers
+  }
+
+  /**
    * Add a new customer
    */
   async store({ request }: HttpContext) {
