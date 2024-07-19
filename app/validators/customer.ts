@@ -6,3 +6,10 @@ const baseValidator = {
 }
 
 export const customerValidator = vine.compile(vine.object(baseValidator))
+
+export const customerValidatorOptional = vine.compile(
+  vine.object({
+    name: baseValidator.name.optional(),
+    cpf: baseValidator.cpf.optional(),
+  })
+)
