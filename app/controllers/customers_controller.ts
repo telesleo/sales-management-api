@@ -12,6 +12,15 @@ export default class CustomersController {
   }
 
   /**
+   * Show individual customer
+   */
+  async show({ params }: HttpContext) {
+    const { id } = params
+    const customer = await Customer.findOrFail(id)
+    return customer
+  }
+
+  /**
    * Add a new customer
    */
   async store({ request }: HttpContext) {
