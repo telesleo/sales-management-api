@@ -50,4 +50,13 @@ export default class CustomersController {
     const newCustomer = await customer.save()
     return newCustomer
   }
+
+  /**
+   * Delete a customer
+   */
+  async destroy({ params }: HttpContext) {
+    const { id } = params
+    const customer = await Customer.findOrFail(id)
+    await customer.delete()
+  }
 }
