@@ -8,10 +8,10 @@ export default class Sale extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column({ serializeAs: null })
+  @column()
   declare customerId: number
 
-  @column({ serializeAs: null })
+  @column()
   declare productId: number
 
   @column()
@@ -28,4 +28,9 @@ export default class Sale extends BaseModel {
 
   @belongsTo(() => Product)
   declare product: BelongsTo<typeof Product>
+
+  public serializeExtras() {
+    const { amount, createdAt, updatedAt } = this
+    return { amount, createdAt, updatedAt }
+  }
 }
