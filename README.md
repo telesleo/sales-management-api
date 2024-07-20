@@ -25,7 +25,7 @@ Esse projeto é uma API de Gerenciamento de Vendas desenvolvida como parte do te
 5. Configure o banco de dados
   - Usando docker:
       ``` bash
-        docker-compose up
+      docker-compose up
       ```
   - Manualmente:
 
