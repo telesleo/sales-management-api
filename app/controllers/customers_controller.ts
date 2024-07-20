@@ -14,16 +14,26 @@ export default class CustomersController {
   /**
    * Show individual customer
    */
-  async show({ params }: HttpContext) {
+  async show({ request, params }: HttpContext) {
     const { id } = params
     const customer = await Customer.findOrFail(id)
+
+    const { month, year } = request.all()
     await customer.load('sales', (query) => {
       query
         .preload('product', (productQuery) => {
           productQuery.select(['id', 'name', 'description'])
         })
         .orderBy('created_at', 'desc')
+
+      if (month) {
+        query.whereRaw('MONTH(created_at) = ?', [month])
+      }
+      if (year) {
+        query.whereRaw('YEAR(created_at) = ?', [year])
+      }
     })
+
     return customer
   }
 
