@@ -1,6 +1,7 @@
 import vine from '@vinejs/vine'
 
 const validatorBase = {
+  customerId: vine.number(),
   country: vine.string().trim(),
   state: vine.string().trim(),
   city: vine.string().trim(),
