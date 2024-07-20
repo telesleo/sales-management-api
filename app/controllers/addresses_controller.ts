@@ -19,4 +19,13 @@ export default class AddressesController {
     const addresses = await Address.all()
     return addresses
   }
+
+  /**
+   * Show individual address
+   */
+  async show({ params }: HttpContext) {
+    const { id } = params
+    const address = await Address.findOrFail(id)
+    return address
+  }
 }
