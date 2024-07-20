@@ -12,6 +12,15 @@ export default class ProductsController {
   }
 
   /**
+   * Show individual product
+   */
+  async show({ params }: HttpContext) {
+    const { id } = params
+    const product = await Product.findOrFail(id)
+    return product
+  }
+
+  /**
    * Add a new product
    */
   async store({ request }: HttpContext) {
