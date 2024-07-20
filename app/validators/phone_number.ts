@@ -6,3 +6,10 @@ const validatorBase = {
 }
 
 export const phoneNumberValidator = vine.compile(vine.object(validatorBase))
+
+export const phoneNumberValidatorOptional = vine.compile(
+  vine.object({
+    customerId: validatorBase.customerId.optional(),
+    number: validatorBase.number.optional(),
+  })
+)
