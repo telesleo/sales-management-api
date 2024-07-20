@@ -17,6 +17,9 @@ export default class CustomersController {
   async show({ params }: HttpContext) {
     const { id } = params
     const customer = await Customer.findOrFail(id)
+    await customer.load('sales', (query) => {
+      query.preload('product')
+    })
     return customer
   }
 

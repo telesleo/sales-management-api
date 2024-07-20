@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, manyToMany } from '@adonisjs/lucid/orm'
-import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
-import Product from './product.js'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Address from './address.js'
 import PhoneNumber from './phone_number.js'
+import Sale from './sale.js'
 
 export default class Customer extends BaseModel {
   @column({ isPrimary: true })
@@ -21,11 +21,8 @@ export default class Customer extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @manyToMany(() => Product, {
-    pivotTable: 'sales',
-    pivotTimestamps: true,
-  })
-  declare sales: ManyToMany<typeof Product>
+  @hasMany(() => Sale)
+  declare sales: HasMany<typeof Sale>
 
   @hasMany(() => Address)
   declare addresses: HasMany<typeof Address>
