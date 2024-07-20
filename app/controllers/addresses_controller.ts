@@ -28,4 +28,13 @@ export default class AddressesController {
     const address = await Address.findOrFail(id)
     return address
   }
+
+  /**
+   * Delete an address
+   */
+  async destroy({ params }: HttpContext) {
+    const { id } = params
+    const address = await Address.findOrFail(id)
+    await address.delete()
+  }
 }
