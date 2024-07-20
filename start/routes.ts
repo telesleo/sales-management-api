@@ -17,7 +17,7 @@ import AddressesController from '../app/controllers/addresses_controller.js'
 import PhoneNumbersController from '../app/controllers/phone_numbers_controller.js'
 import { middleware } from './kernel.js'
 
-router.post('/users', [UsersController, 'store'])
+router.post('/signup', [UsersController, 'store'])
 router.post('/login', [AuthController, 'login'])
 router
   .group(() => {
