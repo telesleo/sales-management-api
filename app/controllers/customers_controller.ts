@@ -37,18 +37,11 @@ export default class CustomersController {
     const { id } = params
     const customer = await Customer.findOrFail(id)
 
-    const data = request.all()
-    const { cpf, name } = await customerValidatorOptional.validate(data)
+    const data = await customerValidatorOptional.validate(request.all())
+    customer.merge(data)
+    await customer.save()
 
-    if (cpf) {
-      customer.cpf = cpf
-    }
-    if (name) {
-      customer.name = name
-    }
-
-    const newCustomer = await customer.save()
-    return newCustomer
+    return customer
   }
 
   /**
