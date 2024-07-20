@@ -43,4 +43,13 @@ export default class ProductsController {
     const product = await Product.create({ name, price, description })
     return product
   }
+
+  /**
+   * Delete a product
+   */
+  async destroy({ params }: HttpContext) {
+    const { id } = params
+    const product = await Product.findOrFail(id)
+    await product.softDelete()
+  }
 }
