@@ -1,5 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { addressValidator } from '../validators/address.js'
+import { addressValidator, addressValidatorOptional } from '../validators/address.js'
 import Address from '../models/address.js'
 
 export default class AddressesController {
@@ -26,6 +26,20 @@ export default class AddressesController {
   async show({ params }: HttpContext) {
     const { id } = params
     const address = await Address.findOrFail(id)
+    return address
+  }
+
+  /**
+   * Update an address
+   */
+  async update({ params, request }: HttpContext) {
+    const { id } = params
+    const address = await Address.findOrFail(id)
+
+    const data = await addressValidatorOptional.validate(request.all())
+    address.merge(data)
+    await address.save()
+
     return address
   }
 
