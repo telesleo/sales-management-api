@@ -11,7 +11,7 @@ const validatorBase = {
 
 export const addressValidator = vine.compile(vine.object(validatorBase))
 
-export const optionalAddressValidator = vine.compile(
+export const addressValidatorOptional = vine.compile(
   vine.object({
     country: validatorBase.country.optional(),
     state: validatorBase.state.optional(),
