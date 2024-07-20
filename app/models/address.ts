@@ -5,7 +5,7 @@ export default class Address extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column({ serializeAs: null })
+  @column()
   declare customerId: number
 
   @column()
