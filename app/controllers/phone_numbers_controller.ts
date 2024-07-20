@@ -12,6 +12,15 @@ export default class PhoneNumbersController {
   }
 
   /**
+   * Show individual phone number
+   */
+  async show({ params }: HttpContext) {
+    const { id } = params
+    const phoneNumber = await PhoneNumber.findOrFail(id)
+    return phoneNumber
+  }
+
+  /**
    * Add a new phone number
    */
   async store({ request }: HttpContext) {
