@@ -7,7 +7,7 @@ export default class CustomersController {
    * Display a list of customers
    */
   async index({}: HttpContext) {
-    const customers = await Customer.all()
+    const customers = await Customer.query().orderBy('id')
     return customers
   }
 
