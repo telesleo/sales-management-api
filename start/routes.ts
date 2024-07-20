@@ -22,9 +22,9 @@ router.post('/login', [AuthController, 'login'])
 router
   .group(() => {
     router.resource('/customers', CustomersController)
-    router.resource('/customers/:customerId/phone-numbers', PhoneNumbersController)
     router.resource('/products', ProductsController)
     router.resource('/sales', SalesController)
     router.resource('/addresses', AddressesController)
+    router.resource('/phone-numbers', PhoneNumbersController)
   })
   .use(middleware.auth())

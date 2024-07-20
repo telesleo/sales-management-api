@@ -1,29 +1,22 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { phoneNumberValidator } from '../validators/phone_number.js'
-import Customer from '../models/customer.js'
+import PhoneNumber from '../models/phone_number.js'
 
 export default class PhoneNumbersController {
   /**
-   * Display a list of phone numbers of a client
+   * Display a list of phone numbers
    */
-  async index({ params }: HttpContext) {
-    const { customerId } = params
-    const customer = await Customer.findOrFail(customerId)
-    await customer.load('phoneNumbers')
-    return customer.phoneNumbers
+  async index({}: HttpContext) {
+    const phoneNumbers = await PhoneNumber.all()
+    return phoneNumbers
   }
 
   /**
-   * Add a new client phone number
+   * Add a new phone number
    */
-  async store({ request, params }: HttpContext) {
-    const { customerId } = params
-    const customer = await Customer.findOrFail(customerId)
-
-    const data = request.all()
-    const { number } = await phoneNumberValidator.validate(data)
-    const phoneNumber = await customer.related('phoneNumbers').create({ number })
-
+  async store({ request }: HttpContext) {
+    const data = await phoneNumberValidator.validate(request.all())
+    const phoneNumber = PhoneNumber.create(data)
     return phoneNumber
   }
 }
