@@ -5,9 +5,11 @@
   "type": "module",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "node bin/server.js",
+    "migrate": "node ace migration:run",
+    "prestart": "npm run migrate",
+    "start": "node ace serve",
     "build": "node ace build",
-    "predev": "node ace migration:run",
+    "predev": "npm run migrate",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
     "lint": "eslint .",
@@ -74,3 +76,4 @@
   },
   "prettier": "@adonisjs/prettier-config"
 }
+
