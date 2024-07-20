@@ -3,6 +3,9 @@ import { addressValidator } from '../validators/address.js'
 import Customer from '../models/customer.js'
 
 export default class AddressesController {
+  /**
+   * Add a new address of a customer
+   */
   async store({ request, params }: HttpContext) {
     const { customerId } = params
     const { country, state, city, street, number } = await addressValidator.validate(request.all())
@@ -17,6 +20,9 @@ export default class AddressesController {
     return address
   }
 
+  /**
+   * Display a list of addresses of a customer
+   */
   async index({ params }: HttpContext) {
     const { customerId } = params
     const customer = await Customer.findOrFail(customerId)
