@@ -4,6 +4,16 @@ import Customer from '../models/customer.js'
 
 export default class SalesController {
   /**
+   * Display a list of phone numbers of a client
+   */
+  async index({ params }: HttpContext) {
+    const { customerId } = params
+    const customer = await Customer.findOrFail(customerId)
+    await customer.load('phoneNumbers')
+    return customer.phoneNumbers
+  }
+
+  /**
    * Add a new sale
    */
   async store({ request }: HttpContext) {
