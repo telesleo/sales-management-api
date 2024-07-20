@@ -18,9 +18,11 @@ export default class CustomersController {
     const { id } = params
     const customer = await Customer.findOrFail(id)
     await customer.load('sales', (query) => {
-      query.preload('product', (productQuery) => {
-        productQuery.select(['id', 'name', 'description'])
-      })
+      query
+        .preload('product', (productQuery) => {
+          productQuery.select(['id', 'name', 'description'])
+        })
+        .orderBy('created_at', 'desc')
     })
     return customer
   }
