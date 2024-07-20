@@ -19,4 +19,13 @@ export default class PhoneNumbersController {
     const phoneNumber = PhoneNumber.create(data)
     return phoneNumber
   }
+
+  /**
+   * Delete a phone number
+   */
+  async destroy({ params }: HttpContext) {
+    const { id } = params
+    const phoneNumber = await PhoneNumber.findOrFail(id)
+    await phoneNumber.delete()
+  }
 }
