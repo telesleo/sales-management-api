@@ -19,6 +19,8 @@ export default class CustomersController {
     const customer = await Customer.findOrFail(id)
 
     const { month, year } = request.all()
+    await customer.load('addresses')
+    await customer.load('phoneNumbers')
     await customer.load('sales', (query) => {
       query
         .preload('product', (productQuery) => {
